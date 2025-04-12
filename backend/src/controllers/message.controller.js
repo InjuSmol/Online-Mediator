@@ -1,67 +1,70 @@
-import Message from "../models/message.model.js"
-import User from "../models/user.model.js"
+import User from "../models/user.model.js";
+import Message from "../models/message.model.js";
 
-export const getUsersForSideBar = async (req,res) => {
-// want to fetch every single user except for yourself
-try {
-    const loggedInUserId = req.user._id
-    const filteredUsers = await User.find({_id: {$ne:loggedInUserId}}).select("-password"); // ne = not equal
-    
-    res.status(200).json(filteredUsers)
+import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
-} catch (error){
-    console.error("Error in getUsersForSideBar: ", error.message);
-    res.status(500).json({error: "Internal server error"});
-}
-}
+export const getUsersForSidebar = async (req, res) => {
+  try {
+    const loggedInUserId = req.user._id;
+    const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
 
-export const getMessages = async (req,res) => {
-    try {
-        const { id:userToChatId } = req.params
-        const myId = req.user._id;
+    res.status(200).json(filteredUsers);
+  } catch (error) {
+    console.error("Error in getUsersForSidebar: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
-        const messages = await Message.find({
-            $or: [
-                {senderId:myId, recieverId:userToChatId},
-                {senderId:userToChatId, recieverId:myId}
-            ]
-        })
-        res.status(200).json(messages)
-    } catch (error) {
-        console.log("Error in getMessages controller: ", error.message)
-        res.status(500).json({error: "Internal Server error"})
+export const getMessages = async (req, res) => {
+  try {
+    const { id: userToChatId } = req.params;
+    const myId = req.user._id;
+
+    const messages = await Message.find({
+      $or: [
+        { senderId: myId, receiverId: userToChatId },
+        { senderId: userToChatId, receiverId: myId },
+      ],
+    });
+
+    res.status(200).json(messages);
+  } catch (error) {
+    console.log("Error in getMessages controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const sendMessage = async (req, res) => {
+  try {
+    const { text, image } = req.body;
+    const { id: receiverId } = req.params;
+    const senderId = req.user._id;
+
+    let imageUrl;
+    if (image) {
+      // Upload base64 image to cloudinary
+      const uploadResponse = await cloudinary.uploader.upload(image);
+      imageUrl = uploadResponse.secure_url;
     }
-}
 
-export const sendMessage = async (req,res) => {
-    // text or an image
-    try {
-        const { text, image } = req.body;
-        const { id: receiverId } = req.params;
-        const senderId = req.user._id; 
-        
-        let imageUrl;
-        if (image) {
-            // upload base64 image to cloudinary
-            const uploadResponse = await cloudinary.uploader.upload(image)
-            imageUrl = uploadResponse.secure_url; 
-        }
-        
-        const newMessage = new Message({
-            senderId, 
-            receiverId, 
-            text, 
-            image: imageUrl,
-        });
+    const newMessage = new Message({
+      senderId,
+      receiverId,
+      text,
+      image: imageUrl,
+    });
 
-        await newMessage.save();
+    await newMessage.save();
 
-        // TODO: real time functionality goes here => socekt.io
-
-        res.status(201).json(newMessage) // save
-
-    } catch (error){
-        console.log("Error in sendMessage controller: ", error.message);
-        res.status(500).json({ error: "Internal server error"});
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
     }
-}
+
+    res.status(201).json(newMessage);
+  } catch (error) {
+    console.log("Error in sendMessage controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

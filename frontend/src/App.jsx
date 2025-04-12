@@ -11,10 +11,12 @@ import { useAuthStore } from "./store/useAuthStore"
 //import { axiosInstance } from "./lib/axios"
 import  { Loader } from "lucide-react"
 import { Toaster } from "react-hot-toast"
+import { useThemeStore } from "./store/useThemeStore"
 
 const App = () => {
 
-  const {authUser, checkAuth, ischeckingAuth} = useAuthStore()
+  const { authUser, checkAuth, ischeckingAuth } = useAuthStore()
+  const { theme } = useThemeStore()
 
   useEffect(() => {
     checkAuth()
@@ -29,8 +31,8 @@ const App = () => {
   )
 
   return (
-    <div>
-
+    <div data-theme={theme}>
+      
       <Navbar />
 
       <Routes>
@@ -41,6 +43,7 @@ const App = () => {
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
       </Routes>
       <Toaster />
+    
     </div>
   )
 }
