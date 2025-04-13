@@ -35,10 +35,31 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
+    <div className="min-h-screen relative flex items-center justify-center overflow-hidden text-[#265F34]"
+      style={{
+        textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        fontFamily: 'Kameron',
+        fontStyle: 'normal',
+        fontWeight: '400',
+        lineHeight: 'normal',
+            }}>
       {/* left side */}
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8">
+        <div
+          className="absolute inset-0 bg-cover bg-center filter blur-md scale-105"
+          style={{
+            backgroundImage: "url('/background.png')",
+          }}
+        />
+        <div className="relative z-10 flex items-center justify-center h-full">
+        <div
+          className="flex flex-col justify-center items-center p-40 py-10 max-w-xl w-full"
+          style={{
+            borderRadius: '40px',
+            background: 'rgba(249, 249, 249, 0.55)',
+            boxShadow: '0px 7px 4px rgba(0, 0, 0, 0.15)',
+            backdropFilter: 'blur(5px)',
+          }}
+        >
           {/* LOGO */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
@@ -119,7 +140,14 @@ const SignUpPage = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
+            <button type="submit" className=" w-full" disabled={isSigningUp}
+              style={{
+                borderRadius: '20px',
+                background: 'rgba(73, 200, 98, 0.93)',
+                
+                boxShadow:'0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+              }}
+            >
               {isSigningUp ? (
                 <>
                   <Loader2 className="size-5 animate-spin" />
@@ -134,7 +162,7 @@ const SignUpPage = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
-              <Link to="/login" className="link link-primary">
+              <Link to="/login" className="link text-[#265F34]">
                 Sign in
               </Link>
             </p>
@@ -143,11 +171,12 @@ const SignUpPage = () => {
       </div>
 
       {/* right side */}
-
+ {/*
       <AuthImagePattern
         title="Join our community"
         subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
       />
+ */}
     </div>
   );
 };

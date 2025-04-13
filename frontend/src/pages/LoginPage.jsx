@@ -18,12 +18,34 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="h-screen grid lg:grid-cols-2">
+    <div className="h-screen relative flex items-center justify-center overflow-hidden text-[#265F34]"
+      style={{
+        textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        fontFamily: 'Kameron',
+        fontStyle: 'normal',
+        fontWeight: '400',
+        lineHeight: 'normal',
+            }}>
       {/* Left Side - Form */}
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8">
+      <div
+        className="absolute inset-0 bg-cover bg-center filter blur-md scale-105"
+        style={{
+          backgroundImage: "url('/background.png')",
+        }}
+      />
+      <div className="relative z-10 flex items-center justify-center h-full">
+      <div
+        className="flex flex-col justify-center items-center p-10 max-w-md w-full"
+        style={{
+          borderRadius: '40px',
+          background: 'rgba(249, 249, 249, 0.55)',
+          boxShadow: '0px 7px 4px rgba(0, 0, 0, 0.15)',
+          backdropFilter: 'blur(5px)',
+        }}
+      >
+      {/*<div className="w-full max-w-md space-y-8 ">*/}
           {/* Logo */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-8  ">
             <div className="flex flex-col items-center gap-2 group">
               <div
                 className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
@@ -85,7 +107,14 @@ const LoginPage = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full" disabled={isLoggingIn}>
+            <button type="submit" className=" w-full" disabled={isLoggingIn}
+              style={{
+                borderRadius: '20px',
+                background: 'rgba(73, 200, 98, 0.93)',
+                
+                boxShadow:'0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+              }}
+            >
               {isLoggingIn ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
@@ -100,7 +129,7 @@ const LoginPage = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Don&apos;t have an account?{" "}
-              <Link to="/signup" className="link link-primary">
+              <Link to="/signup" className="link text-[#265F34]">
                 Create account
               </Link>
             </p>
@@ -108,11 +137,6 @@ const LoginPage = () => {
         </div>
       </div>
 
-      {/* Right Side - Image/Pattern */}
-      <AuthImagePattern
-        title={"Welcome back!"}
-        subtitle={"Sign in to continue your conversations and catch up with your messages."}
-      />
     </div>
   );
 };
