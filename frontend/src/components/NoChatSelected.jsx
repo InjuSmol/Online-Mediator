@@ -11,14 +11,18 @@ const NoChatSelected = () => {
               className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center
              justify-center animate-bounce"
             >
-              <MessageSquare className="w-8 h-8 text-primary " />
+              <img src="/logo.png" alt="Logo" className="w-25 h-18" />
             </div>
           </div>
         </div>
 
         {/* Welcome Text */}
-        <h2 className="text-2xl font-bold">Welcome to Chatty!</h2>
-        <p className="text-base-content/60">
+        <h2 className="text-2xl font-sans font-bold" style={{color: '#FFFFFF',
+                textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                fontFamily: 'Kameron',}}>Welcome to Online Mediator!</h2>
+        <p className="text-base-content/60" style={{color: '#FFFFFF',
+                textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                fontFamily: 'Kameron',}}>
           Select a conversation from the sidebar to start chatting
         </p>
       </div>

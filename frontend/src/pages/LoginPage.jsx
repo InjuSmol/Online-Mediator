@@ -35,7 +35,7 @@ const LoginPage = () => {
       />
       <div className="relative z-10 flex items-center justify-center h-full">
       <div
-        className="flex flex-col justify-center items-center p-10 max-w-md w-full"
+        className="flex flex-col justify-center items-center  p-20 py-10 max-w-md w-full"
         style={{
           borderRadius: '40px',
           background: 'rgba(249, 249, 249, 0.55)',
@@ -51,7 +51,7 @@ const LoginPage = () => {
                 className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
               transition-colors"
               >
-                <MessageSquare className="w-6 h-6 text-primary" />
+                <img src="/logo.png" alt="Logo" className="w-25 h-18" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
               <p className="text-base-content/60">Sign in to your account</p>

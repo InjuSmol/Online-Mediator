@@ -21,9 +21,11 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
               <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-primary" />
+              <img src="/logo.png" alt="Logo" className="w-25 h-18" />
               </div>
-              <h1 className="text-lg font-bold">Chatty</h1>
+              <h1 className="text-xl font-bold" style={{color: '#265F34',
+                textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                fontFamily: 'Kameron',}}>Online Mediator</h1>
             </Link>
           </div>
 
