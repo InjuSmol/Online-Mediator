@@ -13,7 +13,21 @@ The application is still under active development, and further improvements are 
 
 ## Getting Started
 
-### 1. Install dependencies
+### 1. Update the .env: 
+
+```bash
+MONGODB_URI =
+PORT = 5001
+
+JWT_SECRET = 
+NODE_ENV = development
+CLOUDINARY_CLOUD_NAME = 
+CLOUDINARY_API_KEY = 
+CLOUDINARY_API_SECRET = 
+PYTHON_API = http://python:5000/
+```
+
+### 2. Install dependencies
 
 ```bash
 # For backend
@@ -29,7 +43,7 @@ cd ../py_service
 pip install -r requirements.txt
 ```
 
-### 2. Run the services
+### 3. Run the services
 
 In three separate terminals:
 
@@ -47,7 +61,7 @@ cd ../frontend
 npm run dev
 ```
 
-### 3. Access the Application locally: 
+### 4. Access the Application locally: 
 
 Visit: [http://localhost:5173](http://localhost:5173)
 
