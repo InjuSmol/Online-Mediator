@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import { LogOut, MessageSquare, Settings, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
@@ -28,7 +28,7 @@ const Navbar = () => {
                 fontFamily: 'Kameron',}}>Online Mediator</h1>
             </Link>
           </div>
-
+{/*}
           <div className="flex items-center gap-2">
             <Link
               to={"/settings"}
@@ -40,7 +40,7 @@ const Navbar = () => {
               <Settings className="w-4 h-4" />
               <span className="hidden sm:inline">Settings</span>
             </Link>
-
+*/}
             {authUser && (
               <>
                 <Link to={"/profile"} className={`btn btn-sm gap-2`}>
@@ -48,7 +48,7 @@ const Navbar = () => {
                   <span className="hidden sm:inline">Profile</span>
                 </Link>
 
-                <button className="flex gap-2 items-center" onClick={logout}
+                <button className="flex gap-1 items-center px-3 py-2 rounded text-white" onClick={logout}
                   style={{
                     background: '#7DB268',
                   }}
@@ -60,7 +60,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-      </div>
     </header>
   );
 };

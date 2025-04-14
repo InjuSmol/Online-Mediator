@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 import { axiosInstance } from "../lib/axios";
 import { useAuthStore } from "./useAuthStore";
 
+
+
 export const useChatStore = create((set, get) => ({
   messages: [],
   users: [],
@@ -33,15 +35,29 @@ export const useChatStore = create((set, get) => ({
       set({ isMessagesLoading: false });
     }
   },
+
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
     try {
-      const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
+      // Step 1: Formalize the message text
+      const formalizedRes = await axiosInstance.post('/formalizer', {
+        text: messageData.text,
+      });
+  
+      const formalizedText = formalizedRes?.data?.formal || "no message";
+  
+      // Step 2: Send the formalized message to backend
+      const res = await axiosInstance.post(
+        `/messages/send/${selectedUser._id}`,
+        { ...messageData, text: formalizedText } 
+      );
+  
       set({ messages: [...messages, res.data] });
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error("Error in sendMessage:", error);
+      toast.error(error?.response?.data?.message || "Failed to send message");
     }
-  },
+},
 
   subscribeToMessages: () => {
     const { selectedUser } = get();

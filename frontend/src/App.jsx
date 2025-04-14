@@ -1,7 +1,7 @@
-import Navbar from "./components/Navbar"
+//import Navbar from "./components/Navbar"
 import SignupPage from "./pages/SignupPage"
 import LoginPage from "./pages/LoginPage"
-import SettingsPage from "./pages/SettingsPage"
+//import SettingsPage from "./pages/SettingsPage"
 import HomePage from "./pages/HomePage"
 import ProfilePage from "./pages/ProfilePage"
 
@@ -31,13 +31,13 @@ const App = () => {
   )
 
   return (
-    <div data-theme={theme}>
+    <div data-theme={"light"}>
 
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/signup" element={!authUser ? <SignupPage /> : <Navigate to="/" />} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        {/*<Route path="/settings" element={<SettingsPage />} />*/}
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
       </Routes>
       <Toaster />
