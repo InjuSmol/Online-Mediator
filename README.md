@@ -1,6 +1,6 @@
 # Online Mediator — AI-Powered Mediator Chat App
 
-<img width="623" alt="Screenshot 2025-04-14 at 6 20 49 PM" src="https://github.com/user-attachments/assets/364aa64f-ddcc-474d-a908-57baaeafe05c" />
+<img width="547" alt="Screenshot 2025-04-14 at 6 20 49 PM" src="https://github.com/user-attachments/assets/364aa64f-ddcc-474d-a908-57baaeafe05c" />
 
 <img width="547" alt="Screenshot 2025-04-14 at 6 24 09 PM" src="https://github.com/user-attachments/assets/5991f093-428b-4eb8-bab3-a3e7f5a5a6fa" />
 
