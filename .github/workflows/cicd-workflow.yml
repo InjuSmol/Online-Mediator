@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.DH_USERNAME }}
           password: ${{ secrets.DH_TOKEN }}
       - name: Build Backend Image
-        run: docker build -t variasmol/backend:latest ./backend
+        run: docker build -t variatsmol/backend:latest ./backend
       - name: Push Backend Image
         run: docker push variatsmol/backend:latest
 
