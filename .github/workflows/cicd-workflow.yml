@@ -16,15 +16,21 @@ jobs:
           username: ${{ secrets.DH_USERNAME }}
           password: ${{ secrets.DH_TOKEN }}
       - name: Build and Push Backend Image
+        env:
+          DOCKER_BUILDKIT: 0
         run: |
           docker build -t ${{ secrets.DH_USERNAME }}/backend ./backend 
           docker push ${{ secrets.DH_USERNAME }}/backend
       - name: Build and Push Frontend Image
+        env:
+          DOCKER_BUILDKIT: 0
         run: |
           docker build -t ${{ secrets.DH_USERNAME }}/frontend ./frontend
           docker push ${{ secrets.DH_USERNAME }}/frontend
 
       - name: Build and Push Python Service Image
+        env:
+          DOCKER_BUILDKIT: 0
         run: |
           docker build -t ${{ secrets.DH_USERNAME }}/python-service ./py_service
           docker push ${{ secrets.DH_USERNAME }}/python-service
