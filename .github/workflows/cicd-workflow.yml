@@ -17,15 +17,8 @@ jobs:
           password: ${{ secrets.DH_TOKEN }}
       - name: Build and Push Backend Image
         run: |
-          docker buildx build -t ${{ secrets.DH_USERNAME }}/backend:latest ./backend --push
-
-      - name: Build and Push Frontend Image
-        run: |
-          docker buildx build -t ${{ secrets.DH_USERNAME }}/frontend:latest ./frontend --push
-
-      - name: Build and Push Python Service Image
-        run: |
-          docker buildx build -t ${{ secrets.DH_USERNAME }}/python-service:latest ./py_service --push
+          docker build -t ${{ secrets.DH_USERNAME }}/backend ./backend 
+          docker push ${{ secrets.DH_USERNAME }}/backend:latest
 
 
   deploy:
