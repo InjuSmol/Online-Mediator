@@ -11,7 +11,7 @@ jobs:
       - name: Checkout source 
         uses: actions/checkout@v3
       - name: Login to docker Hub
-        run: docker login -u ${{secrets.DH_USERNAME}} -p ${{secrets.DH_PASSWORD}}
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Build Docker Image
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mediator-image:latest .
       - name: Publish Image to Docker Hub
