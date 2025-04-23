@@ -16,12 +16,7 @@ jobs:
           username: ${{ secrets.DH_USERNAME }}
           password: ${{ secrets.DH_TOKEN }}
       - name: Build and Push Backend Image
-        run: |
-          docker buildx build \
-            --push \
-            -t ${{ secrets.DH_USERNAME }}/backend:latest \
-            ./backend
-
+        run: docker build -t your_dockerhub_username/backend:latest ./backend
 
   deploy:
     needs: build
