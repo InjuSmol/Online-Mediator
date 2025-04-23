@@ -34,9 +34,14 @@ jobs:
     needs: build
     runs-on: [aws-ec2]
     steps: 
-      - name: Pull Image from Docker Hub
-        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mediator-image:latest
-      - name: Delete old container
-        run: docker rm -f mediator-image-container
-      - name: Run Docker Container
-        run: docker-compose -f docker-compose.yml up -d
+      - name: Pull images from Docker Hub
+        run: |
+          docker pull variatsmol/backend:latest
+          docker pull variatsmol/frontend:latest
+          docker pull variatsmol/py_service:latest
+
+      - name: Stop and remove old containers
+        run: docker-compose down
+
+      - name: Start updated containers
+        run: docker-compose up -d
