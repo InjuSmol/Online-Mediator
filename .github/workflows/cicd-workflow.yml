@@ -29,7 +29,7 @@ jobs:
         run: docker build -t variatsmol/py_service:latest ./py_service
       - name: Push Python service Image
         run: docker push variatsmol/py_service:latest 
-
+'''
   deploy:
     needs: build
     runs-on: [aws-ec2]
@@ -45,3 +45,4 @@ jobs:
 
       - name: Start updated containers
         run: docker-compose up -d
+'''
