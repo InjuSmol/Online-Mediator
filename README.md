@@ -25,6 +25,7 @@ CLOUDINARY_CLOUD_NAME =
 CLOUDINARY_API_KEY = 
 CLOUDINARY_API_SECRET = 
 PYTHON_API = http://python:5000/
+HF_API_TOKEN = 
 ```
 
 ### 2. Install dependencies
