@@ -35,6 +35,9 @@ jobs:
     needs: build
     runs-on: [aws-ec2]
     steps: 
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
       - name: Pull images from Docker Hub
         run: |
           docker pull variatsmol/backend:latest
