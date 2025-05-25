@@ -29,3 +29,19 @@ jobs:
         run: docker build -t variatsmol/py_service:latest ./py_service
       - name: Push Python service Image
         run: docker push variatsmol/py_service:latest 
+
+
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps: 
+      - name: Pull images from Docker Hub
+        run: |
+          docker pull variatsmol/backend:latest
+          docker pull variatsmol/frontend:latest
+
+      - name: Stop and remove old containers
+        run: docker-compose down
+
+      - name: Start updated containers
+        run: docker-compose up -d
