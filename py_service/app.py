@@ -30,6 +30,7 @@ def formalize():
     result = response.json()
     
     try:
+        print("HF_API_TOKEN =", os.getenv("HF_API_TOKEN"))
         formal_text = result[0]["generated_text"]
     except Exception as e:
         print("Raw response text:", response.text)  # Add this line
