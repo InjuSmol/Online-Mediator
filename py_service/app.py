@@ -31,9 +31,10 @@ def formalize():
     
     try:
         formal_text = result[0]["generated_text"]
-    except (KeyError, IndexError):
-        return jsonify({"error": "Failed to generate text", "raw_response": result}), 500
-
+    except Exception as e:
+        print("Raw response text:", response.text)  # Add this line
+        print("Status code:", response.status_code) # Add this too
+        return jsonify({"error": "Failed to generate text", "raw_response": response.text}), 500
     return jsonify({"formal": formal_text})
     
 ##############################################################
