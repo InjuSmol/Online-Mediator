@@ -4,6 +4,16 @@
 
 <img width="547" alt="Screenshot 2025-04-14 at 6 24 09 PM" src="https://github.com/user-attachments/assets/5991f093-428b-4eb8-bab3-a3e7f5a5a6fa" />
 
+```
+User → React Frontend (not shown)
+      ↓
+Express Server (Node.js)
+      ↳ User Auth (MongoDB)
+      ↳ Message API + Realtime via Socket.io
+      ↳ /formalizer → Flask Microservice
+                         ↓
+       Hugging Face API: Formal Language Model
+```
 
 Online AI Mediator is a full-stack web application designed to facilitate thoughtful and respectful communication between users through real-time chat. Built with the MERN stack (MongoDB, Express, React, Node.js), socket.io for real-time messages exchanges. The platform integrates a Python-based Flask microservice that leverages a NLP model (prithivida/informal_to_formal_styletransfer) to transform informal or emotionally charged messages into a more formal and neutral tone before delivery.
 
