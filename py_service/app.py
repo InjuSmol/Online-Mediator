@@ -26,8 +26,8 @@ def formalize():
     data = request.json
     text = data.get("text", "")
     
-    response = requests.post(API_URL, headers=headers, json={"inputs": text})
-    result = response.json()
+    #response = requests.post(API_URL, headers=headers, json={"inputs": text})
+    #result = response.json()
     
     try:
         print("HF_API_TOKEN =", os.getenv("HF_API_TOKEN"))
@@ -37,7 +37,7 @@ def formalize():
         print("Status code:", response.status_code) # Add this too
         return jsonify({"error": "Failed to generate text", "raw_response": response.text}), 500
     #return jsonify({"formal": formal_text})
-    return 
+    return (text)
     
 ##############################################################
 # The original endpoint (local model) 
