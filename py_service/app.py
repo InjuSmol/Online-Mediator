@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 #HF_API_TOKEN = os.getenv(process.env.HF_API_TOKEN)
 
-API_URL = "https://api-inference.huggingface.co/models/prithivida/informal_to_formal_styletransfer"
+API_URL = "https://api-inference.huggingface.co/models/transformer23/formality-style-transfer"
 
 #model_name = "prithivida/informal_to_formal_styletransfer"
 #tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -26,18 +26,17 @@ def formalize():
     data = request.json
     text = data.get("text", "")
     
-    #response = requests.post(API_URL, headers=headers, json={"inputs": text})
-    #result = response.json()
+    response = requests.post(API_URL, headers=headers, json={"inputs": text})
+    result = response.json()
     
     try:
         print("HF_API_TOKEN =", os.getenv("HF_API_TOKEN"))
-        #formal_text = result[0]["generated_text"]
+        formal_text = result[0]["generated_text"]
     except Exception as e:
         print("Raw response text:", response.text)  # Add this line
         print("Status code:", response.status_code) # Add this too
         return jsonify({"error": "Failed to generate text", "raw_response": response.text}), 500
-    #return jsonify({"formal": formal_text})
-    return (text)
+    return jsonify({"formal": formal_text})
     
 ##############################################################
 # The original endpoint (local model) 
