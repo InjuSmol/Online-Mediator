@@ -14,7 +14,7 @@ API_URL = "https://api-inference.huggingface.co/models/prithivida/informal_to_fo
 #model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
 headers = {
-    "Authorization": f"Bearer {process.env.HF_API_TOKEN}"
+    "Authorization": f"Bearer {os.getenv("HF_API_TOKEN")}"
 }
 
 # Hugging face Inference API call: 
