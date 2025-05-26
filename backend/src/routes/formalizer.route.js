@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
 
   try {
     const url = process.env.PYTHON_API || "http://localhost:5002/";
-    //const ulr = "http://localhost:5001/";
+    //const ulr = "http://localhost:5002/";
     const response = await axios.post(url, { text });
     if (!response.data.formal){
         console.log("fail fail")
