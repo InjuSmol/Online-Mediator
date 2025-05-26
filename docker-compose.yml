@@ -6,7 +6,7 @@ services:
     depends_on:
       - python
     environment:
-      - PYTHON_API=http://python:5001
+      - PYTHON_API=http://python:5002
 
   frontend:
     build: ./frontend
@@ -19,5 +19,5 @@ services:
     build: ./py_service
     container_name: python
     ports:
-      - "5001:5001"
+      - "5002:5002"
 
