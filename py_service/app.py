@@ -31,12 +31,13 @@ def formalize():
     
     try:
         print("HF_API_TOKEN =", os.getenv("HF_API_TOKEN"))
-        formal_text = result[0]["generated_text"]
+        #formal_text = result[0]["generated_text"]
     except Exception as e:
         print("Raw response text:", response.text)  # Add this line
         print("Status code:", response.status_code) # Add this too
         return jsonify({"error": "Failed to generate text", "raw_response": response.text}), 500
-    return jsonify({"formal": formal_text})
+    #return jsonify({"formal": formal_text})
+    return 
     
 ##############################################################
 # The original endpoint (local model) 
