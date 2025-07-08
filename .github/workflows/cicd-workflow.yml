@@ -31,20 +31,20 @@ jobs:
         run: docker push variatsmol/py_service:latest 
 
 
-  deploy:
-    needs: build
-    runs-on: [aws-ec2]
-    steps: 
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
-      - name: Pull images from Docker Hub
-        run: |
-          docker pull variatsmol/backend:latest
-          docker pull variatsmol/frontend:latest
+ # deploy:
+ #   needs: build
+ #   runs-on: [aws-ec2]
+ #   steps: 
+ #     - name: Checkout code
+ #       uses: actions/checkout@v3
+ #       
+ #     - name: Pull images from Docker Hub
+ #       run: |
+ #         docker pull variatsmol/backend:latest
+ #         docker pull variatsmol/frontend:latest
 
-      - name: Stop and remove old containers
-        run: docker-compose down
+ #     - name: Stop and remove old containers
+ #       run: docker-compose down
 
-      - name: Start updated containers
-        run: docker-compose up -d
+ #     - name: Start updated containers
+ #       run: docker-compose up -d
