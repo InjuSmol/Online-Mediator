@@ -1,7 +1,5 @@
-export default {
-    uploader: {
-      upload: jest.fn().mockResolvedValue({ secure_url: "http://mocked.cloudinary/image.jpg" }),
-    },
-  };
-  
-
+jest.mock('../src/lib/cloudinary.js', () => ({
+  default: {
+    config: jest.fn(),
+  },
+}));
