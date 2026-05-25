@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
   const { text } = req.body;
 
   try {
-    const url = process.env.PYTHON_API || "http://localhost:5002/";
+    const url = process.env.PYTHON_API || "http://18.188.75.118:5002/";
     //const ulr = "http://localhost:5002/";
     const response = await axios.post(url, { text });
     if (!response.data.formal){
