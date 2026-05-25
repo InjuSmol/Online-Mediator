@@ -45,7 +45,7 @@ export const useChatStore = create((set, get) => ({
       //});
   
       //const formalizedText = formalizedRes?.data?.formal || "no message";
-      const formalizedText = messageData.text? || "no message";
+      const formalizedText = messageData?.text || "no message";
   
       // Step 2: Send the formalized message to backend
       const res = await axiosInstance.post(
