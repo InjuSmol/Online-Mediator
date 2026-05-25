@@ -40,11 +40,12 @@ export const useChatStore = create((set, get) => ({
     const { selectedUser, messages } = get();
     try {
       // Step 1: Formalize the message text
-      const formalizedRes = await axiosInstance.post('/formalizer', {
-        text: messageData.text,
-      });
+      //const formalizedRes = await axiosInstance.post('/formalizer', {
+       // text: messageData.text,
+      //});
   
-      const formalizedText = formalizedRes?.data?.formal || "no message";
+      //const formalizedText = formalizedRes?.data?.formal || "no message";
+      const formalizedText = messageData.text? || "no message";
   
       // Step 2: Send the formalized message to backend
       const res = await axiosInstance.post(
