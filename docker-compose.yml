@@ -3,10 +3,6 @@ services:
     build: ./backend
     ports:
       - "5001:5001"
-    depends_on:
-      - python
-    environment:
-      - PYTHON_API=http://python:5002
 
   frontend:
     build: ./frontend
@@ -15,9 +11,26 @@ services:
     depends_on:
       - backend
 
-  python:
-    build: ./py_service
-    container_name: python
-    ports:
-      - "5002:5002"
+#services:
+#  backend:
+#    build: ./backend
+#    ports:
+#      - "5001:5001"
+#    depends_on:
+#      - python
+#    environment:
+#      - PYTHON_API=http://python:5002
+
+#  frontend:
+#    build: ./frontend
+#    ports:
+#      - "5173:5173"
+#    depends_on:
+#      - backend
+
+#  python:
+#    build: ./py_service
+#    container_name: python
+#    ports:
+#      - "5002:5002"
 
