@@ -33,7 +33,8 @@ app.use(cookieParser()); // Parse cookies into `req.cookies`
 // Enable CORS to allow frontend (on port 5173) to make requests to backend
 app.use(
   cors({
-    origin: "http://localhost:5173", // Only allow requests from this origin
+    //origin: "http://localhost:5173", // Only allow requests from this origin
+    origin: "*",
     credentials: true, // Allow cookies to be sent in cross-origin requests
   })
 );
