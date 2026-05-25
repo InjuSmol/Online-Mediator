@@ -39,10 +39,10 @@ jobs:
       - name: Push Frontend Image
         run: docker push variatsmol/frontend:latest 
 
-      - name: Build Python service Image
-        run: docker build -t variatsmol/py_service:latest ./py_service
-      - name: Push Python service Image
-        run: docker push variatsmol/py_service:latest 
+      #- name: Build Python service Image
+      #  run: docker build -t variatsmol/py_service:latest ./py_service
+      #- name: Push Python service Image
+      #   run: docker push variatsmol/py_service:latest 
 
 
  # deploy:
