@@ -31,13 +31,17 @@ app.use(express.json()); // Parse incoming JSON payloads into `req.body`
 app.use(cookieParser()); // Parse cookies into `req.cookies`
 
 // Enable CORS to allow frontend (on port 5173) to make requests to backend
-app.use(
+/*app.use(
   cors({
     //origin: "http://localhost:5173", // Only allow requests from this origin
     origin: "*",
     credentials: true, // Allow cookies to be sent in cross-origin requests
   })
-);
+);*/
+app.use(cors({
+  origin: "http://18.188.75.118:5173",
+  credentials: true
+}));
 
 app.use(bodyParser.json()); // Parse JSON request bodies (can be redundant with express.json())
 
