@@ -8,46 +8,98 @@ import { config } from "dotenv";
 
 
 export const signup = async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, email, phone, password } = req.body;
+
   try {
-    if (!fullName || !email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+    if (!fullName || !email || !phone || !password) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
     }
 
     if (password.length < 6) {
-      return res.status(400).json({ message: "Password must be at least 6 characters" });
+      return res.status(400).json({
+        message: "Password must be at least 6 characters",
+      });
     }
 
-    const user = await User.findOne({ email });
+    const normalizedEmail = email.trim().toLowerCase();
+    const normalizedPhone = phone.trim();
 
-    if (user) return res.status(400).json({ message: "Email already exists" });
+    /*
+     * Check BOTH email and phone.
+     */
+    const existingUser = await User.findOne({
+      $or: [
+        { email: normalizedEmail },
+        { phone: normalizedPhone },
+      ],
+    });
+
+    if (existingUser) {
+      if (existingUser.email === normalizedEmail) {
+        return res.status(400).json({
+          message: "Email already exists",
+        });
+      }
+
+      if (existingUser.phone === normalizedPhone) {
+        return res.status(400).json({
+          message: "Phone number already exists",
+        });
+      }
+    }
 
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const hashedPassword = await bcrypt.hash(
+      password,
+      salt
+    );
 
     const newUser = new User({
       fullName,
-      email,
+      email: normalizedEmail,
+      phone: normalizedPhone,
       password: hashedPassword,
+
+      phoneVerified: false,
+      emailVerified: false,
     });
 
-    if (newUser) {
-      // generate jwt token here
-      generateToken(newUser._id, res);
-      await newUser.save();
+    /*
+     * Save FIRST.
+     */
+    await newUser.save();
 
-      res.status(201).json({
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        email: newUser.email,
-        profilePic: newUser.profilePic,
-      });
-    } else {
-      res.status(400).json({ message: "Invalid user data" });
-    }
+    /*
+     * For now we're keeping your existing login behavior.
+     *
+     * When we implement verification, I recommend moving
+     * token generation until AFTER required verification.
+     */
+    generateToken(newUser._id, res);
+
+    res.status(201).json({
+      _id: newUser._id,
+      fullName: newUser.fullName,
+      email: newUser.email,
+      phone: newUser.phone,
+
+      emailVerified: newUser.emailVerified,
+      phoneVerified: newUser.phoneVerified,
+
+      profilePic: newUser.profilePic,
+    });
   } catch (error) {
-    console.log("Error in signup controller", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.log(
+      "Error in signup controller:",
+      error.message
+    );
+
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
   }
 };
 
