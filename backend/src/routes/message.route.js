@@ -1,12 +1,41 @@
 import express from "express";
+
 import { protectRoute } from "../middleware/auth.middleware.js";
-import { getMessages, getUsersForSidebar, sendMessage } from "../controllers/message.controller.js";
+
+import {
+  getMessages,
+  getConversationsForSidebar,
+  sendMessage,
+} from "../controllers/message.controller.js";
 
 const router = express.Router();
 
-router.get("/users", protectRoute, getUsersForSidebar);
-router.get("/:id", protectRoute, getMessages);
+/*
+ * Get only conversations belonging to
+ * the logged-in user.
+ */
+router.get(
+  "/conversations",
+  protectRoute,
+  getConversationsForSidebar
+);
 
-router.post("/send/:id", protectRoute, sendMessage);
+/*
+ * Get messages from one conversation.
+ */
+router.get(
+  "/:conversationId",
+  protectRoute,
+  getMessages
+);
+
+/*
+ * Send a message to one conversation.
+ */
+router.post(
+  "/send/:conversationId",
+  protectRoute,
+  sendMessage
+);
 
 export default router;
